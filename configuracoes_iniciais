@@ -1,0 +1,30 @@
+Instalar VirtualBox 6.1
+
+Fazer o download do disco rigido da vitualbox ja instalado/formatado do site osboxes.org
+
+
+Configurar o teclado para portugues br abnt-2
+  
+  $ sudo dpkg-reconfigure keyboard-configuration  
+    No menu do sistema selecione o tipo de teclado como 
+       * Generic 104-key PC
+    Depois é só ir selecionando as configurações PT-BR
+ 
+ 
+Para atuaizar totalmente o sistema insira os seguintes comandos:
+
+  $ sudo apt update
+  $ sudo apt upgrade
+  $ sudo apt dist-upgrade
+  
+Adicionar um usuario
+  $ sudo adduser your_user
+  
+Conseder privilegios administrativos
+  $ sudo usermod -aG sudo your_user
+  
+Alterar o nome de host
+ $ nano /etc/hostname
+ $ nano /etc/hosts
+ 
+  
