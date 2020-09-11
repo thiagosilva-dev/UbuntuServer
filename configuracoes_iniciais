@@ -22,9 +22,54 @@ Adicionar um usuario
   
 Conseder privilegios administrativos
   $ sudo usermod -aG sudo your_user
+ 
+Remover um usuario
+  $ userdel nomedousuario
+Remover um usuario e a sua pasta home
+  $ userdel -r nomedousuario
   
 Alterar o nome de host
- $ nano /etc/hostname
- $ nano /etc/hosts
+  $ nano /etc/hostname
+  $ nano /etc/hosts
+
+Habilitar o firewall basico
+  $ ufw enable
+Desabilitar o firewall
+  $ ufw disable
+Verificar o status
+  $ ufw status
+Verificar as entradas no firewall
+  $ ufw app list
+Adicionar um app nas exeções do firewall
+  $ ufw allow Openssh
+  
+Instalar o acesso remoto via ssh
+
+  $ sudo apt-get install openssh-server
+
+Instalar os utilitarios de rede net-tools
+  $ sudo apt intall net-tools
+  
+Instalar o servidor apache
+  $ sudo apt install apache2
+
+Verificar o status do servidor apache
+  $ systemctl status apache2
+
+Verificar ip privado do servidor
+  hostname -I
+Verificar publico do servidor
+  crul -4 icanhazip.com
+  
+ não esqueça de ajustar o firewall depois, caso contratio não sera possivel fazer conexã
  
+ desligar servidor
+  $ sudo shutdown -h now
+ 
+ 
+ 
+ 
+
+
+  
   
