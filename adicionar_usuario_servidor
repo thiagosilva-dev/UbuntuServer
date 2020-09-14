@@ -1,0 +1,11 @@
+Adicionar um usuario
+  $ sudo adduser your_user
+
+Remover um usuario
+  $ userdel nomedousuario
+
+Remover um usuario e a sua pasta home
+  $ userdel -r nomedousuario
+
+Conseder privilegios administrativos (root)
+  $ sudo usermod -aG sudo your_user
