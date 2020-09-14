@@ -1,0 +1,7 @@
+Configurar o teclado para portugues br abnt-2  
+  $ sudo dpkg-reconfigure keyboard-configuration  
+
+Nas opções de configuração que seram apresentadas selecione:
+       * Generic 104-key PC
+
+Depois é só ir selecionando as configurações PT-BR
