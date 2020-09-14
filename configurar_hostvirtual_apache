@@ -1,0 +1,70 @@
+Crie o diretório para o your_domain como segue:
+
+    sudo mkdir /var/www/your_domain
+
+Em seguida, atribua a propriedade do diretório com a variável de ambiente $USER:
+
+    sudo chown -R $USER:$USER /var/www/your_domain
+
+As permissões dos seus web roots devem estar corretas se você não tiver modificado seu valor de umask, que define permissões padrão de arquivos. Para garantir que suas permissões estejam corretas e permitam que o proprietário leia, escreva e execute os arquivos, enquanto concede apenas permissões de leitura e execução para grupos e outros, você pode digitar o seguinte comando:
+
+    sudo chmod -R 755 /var/www/your_domain
+
+A seguir, crie uma página de amostra index.html utilizando o nano ou seu editor favorito:
+
+    sudo nano /var/www/your_domain/index.html
+
+Dentro, adicione a seguinte amostra HTML:
+/var/www/your_domain/index.html
+
+<html>
+    <head>
+        <title>Welcome to Your_domain!</title>
+    </head>
+    <body>
+        <h1>Success!  The your_domain virtual host is working!</h1>
+    </body>
+</html>
+
+Salve e feche o arquivo quando você terminar.
+
+Para que o Apache sirva este conteúdo, é necessário criar um arquivo de host virtual com as diretivas corretas. Em vez de modificar o arquivo de configuração padrão localizado em /etc/apache2/sites-available/000-default.conf diretamente, vamos criar um novo em /etc/apache2/sites-available/your_domain.conf:
+
+    sudo nano /etc/apache2/sites-available/your_domain.conf
+
+Cole no seguinte bloco de configuração, que é similar ao padrão, mas atualizado para nosso novo diretório e nome de domínio:
+/etc/apache2/sites-available/your_domain.conf
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName your_domain
+    ServerAlias www.your_domain
+    DocumentRoot /var/www/your_domain
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+Note que atualizamos o DocumentRoot para nosso novo diretório e o ServerAdmin para um e-mail que o administrador do site your_domain pode acessar. Também adicionamos duas diretivas: o ServerName, que estabelece o domínio base que deve corresponder e essa definição de host virtual, e o ServerAlias, que define nomes adicionais que devem corresponder como se fossem o nome base.
+
+Salve e feche o arquivo quando você terminar.
+
+Vamos habilitar o arquivo com a ferramenta a2ensite:
+
+    sudo a2ensite your_domain.conf
+
+Desabilite o site padrão definido em 000-default.conf:
+
+    sudo a2dissite 000-default.conf
+
+Em seguida, vamos testar à procura de erros de configuração:
+
+    sudo apache2ctl configtest
+
+Você deve receber a seguinte saída:
+
+Output
+Syntax OK
+
+Reinicie o Apache para implementar as suas alterações:
+
+    sudo systemctl restart apache2
