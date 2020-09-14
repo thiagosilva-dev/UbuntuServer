@@ -1,0 +1,5 @@
+Para atuaizar totalmente o sistema insira os seguintes comandos nesta ordem:
+
+  $ sudo apt update
+  $ sudo apt upgrade
+  $ sudo apt dist-upgrade
