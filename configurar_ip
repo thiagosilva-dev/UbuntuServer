@@ -1,0 +1,26 @@
+#Faça um backup das configurações atuais de rede:
+  $sudo cp /etc/netplan 00-installer-config.yaml /etc/netplan 00-installer-config.yaml.bkp
+  
+#Exclua a configuração de rede atual:
+  rm /etc/netplan 00-intaller-config.yaml
+
+#Crie um novo arquivo de configurações bem identado semelhante a este
+  $ sudo nano /etc/netplan 01-config-redes.yaml
+  
+    network:
+      version: 2
+      ethernets:
+        enp0s3:
+          dhcp4: false
+          dhcp6: false
+          addresses: [192.168.1.220]
+          gateway4: 192.168.1.1
+          nameservers:
+            addresses: [10.252.2.254, 8.8.8.8]
+            
+#Para chegar se o novo arquivo nao contem nenhum erro:
+  $ sudo netplan try
+
+#Para aplicar as novas configurações:
+  $ sudo netplan apply
+  
