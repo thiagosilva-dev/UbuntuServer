@@ -1,0 +1,22 @@
+Muitos usuários novatos não se atentam ao fato de que quando um novo repositório é adicionado, a instalação de sua chave pública (GPG) é obrigatória e tem que ser instalada manualmente (salvo em caso de comandos com a instalação da GPG prevista).
+
+Quando isso não acontece, temos erros no update do sistema como o emulado abaixo.
+
+    W: Erro GPG: https://download.sublimetext.com apt/stable/ InRelease: As assinaturas a seguir não puderam ser verificadas devido à chave pública não estar disponível: NO_PUBKEY F57D4F59BD3DF454
+
+
+Nesse caso eu fiz o repositório do sublime-text mas não instalei a chave pública dele. A instalação é muito fácil e básica, para isso basta termos conhecimento do servidor de GPG, eu só uso 2, sendo que só uso o do MIT se o do Ubuntu estiver fora do ar.
+
+    https://keyserver.ubuntu.com
+    https://pgp.mit.edu
+
+
+Vamos aos comandos para instalar a chave pública do nosso exemplo, a escolha do servidor é opcional:
+
+Opção 1 - keyserver.ubuntu.com:
+
+# apt-key adv --keyserver keyserver.ubuntu.com --recv F57D4F59BD3DF454
+
+Opção 2 - pgp.mit.edu:
+
+# apt-key adv --keyserver pgp.mit.edu --recv F57D4F59BD3DF454
