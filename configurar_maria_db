@@ -15,8 +15,25 @@
   $sudo mariadb
     MariaDB [(none)]> $ GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
     MariaDB [(none)]> $ FLUSH PRIVILEGES;
-    MariaDB [(none)]> $ exit;  
+    MariaDB [(none)]> $ exit; 
+    
+#Para alterar a senha de um usuario execute
+  $ ALTER USER 'admin'@'localhost' IDENTIFIED BY 'nova-senha';
   
+#Para liberar o acesso ao banco de dados a partir de outro host/maquina comente a linha 'bind-address = 127.0.0.1' com '#' em:
+  $ nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
+#Agora de permisão para um usuario acessar remotamente o banco de dados  
+  MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+  MariaDB [(none)]> FLUSH PRIVILEGES;
+  
+#Resta liberar a porta 3306 para acesso externo (porta 3306 é a padrão do MariaDB)
+  $ iptables -t filter -A INPUT -p tcp --dport 3306 -j ACCEPT
+  $ iptables -t filter -A INPUT -p udp --dport 3306 -j ACCEPT  
+  
+#Para validar a liberação você pode rodar a consulta abaixo que mostra as liberações existentes:
+  MariaDB [(none)]> SELECT User, Host FROM mysql.user WHERE Host <> 'localhost';    
+
 #Verificar se o MariaDB esta em execução:
   $ sudo systemctl status mariadb
   
