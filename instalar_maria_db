@@ -1,0 +1,27 @@
+
+# Primeiro Atualize o sistema
+
+  $ sudo apt update
+  $ sudo apt upgrade
+  $ sudo apt dist-upgrade
+
+#Instale o MariaDB
+  $ sudo apt install mariadb-server
+  
+#Ative as opções de instalação segura  
+  $ sudo mysql_secure_installation
+  
+#Vamos criar um usuario administrador do mariadb
+  $sudo mariadb
+    MariaDB [(none)]> $ GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+    MariaDB [(none)]> $ FLUSH PRIVILEGES;
+    MariaDB [(none)]> $ exit;  
+  
+#Verificar se o MariaDB esta em execução:
+  $ sudo systemctl status mariadb
+  
+#Se o MariaDB não tiver em execução inicie o com:
+  $ sudo systemctl start mariadb
+
+#Retorna a versão do mariadb
+  $ sudo mysqladmin version
